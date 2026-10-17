@@ -414,6 +414,16 @@ async def serve_index():
     else:
         return "<h1>AirSight AI is running. Template file not found.</h1>"
 
+DOC_TEMPLATE_PATH = os.path.join(BASE_DIR, "templates", "documentation.html")
+
+@app.get("/documentation", response_class=HTMLResponse)
+async def serve_documentation():
+    if os.path.exists(DOC_TEMPLATE_PATH):
+        with open(DOC_TEMPLATE_PATH, "r", encoding="utf-8") as f:
+            return f.read()
+    else:
+        return "<h1>AirSight AI Documentation file not found.</h1>"
+
 if __name__ == "__main__":
     import uvicorn
     print("\n" + "="*70)
